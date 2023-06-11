@@ -1,7 +1,12 @@
 import json
 import datetime
+import os
 
-with open("operations.json", encoding='utf-8') as file:
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+
+with open(dir_path + '/' + 'operations.json', 'r') as file:
     data = json.load(file)
 
 
@@ -10,7 +15,7 @@ def remove_invalid(data):
 
     for i in data:
         if "date" in i.keys() and "state" in i.keys() and \
-                "description" in i.keys() and "from" in i.keys() and "to" in i.keys() and i["state"] == 'EXECUTED':
+                "description" in i.keys() and "from" in i.keys() and "to" in i.keys() and i["state"] == 'EXECUTED' and i["from"]!= None:
             data_corr.append(i)
     return data_corr
 
